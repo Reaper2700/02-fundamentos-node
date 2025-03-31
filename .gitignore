@@ -10,4 +10,4 @@ db/*.db
 .env.test
 
 #build
-list
+dist
