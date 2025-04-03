@@ -60,7 +60,7 @@ export async function transactionsRoute(app: FastifyInstance) {
       return { transaction }
     },
   )
-
+  console.log()
   app.get(
     '/summary',
     {
