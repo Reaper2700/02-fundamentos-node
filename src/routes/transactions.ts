@@ -2,11 +2,26 @@ import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import { knex } from '../database'
 import { randomUUID } from 'crypto'
-import { checkSessionIdExist } from '../middleware/check-sessions-id-exist'
+import {
+  AdminCheck,
+  checkSessionIdExist,
+} from '../middleware/check-sessions-id-exist'
 
 // todo plugin do fastfy funciona com async
 
 export async function transactionsRoute(app: FastifyInstance) {
+  app.get(
+    '/admin',
+    {
+      preHandler: [AdminCheck],
+    },
+    async () => {
+      const transactions = await knex('transactions').select('*')
+
+      return { transactions }
+    },
+  )
+
   app.get(
     '/',
     {

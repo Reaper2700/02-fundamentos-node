@@ -12,3 +12,11 @@ export async function checkSessionIdExist(
     })
   }
 }
+
+export async function AdminCheck(request: FastifyRequest, reply: FastifyReply) {
+  const { adminId } = request.cookies
+
+  if (adminId !== 'Reaper270') {
+    return reply.status(403).send({ error: 'Acesso negado' })
+  }
+}
